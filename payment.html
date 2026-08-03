@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Agent Portal - Payment</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="config.js"></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body data-page="payment" data-layout="full">
+    <div class="container">
+      <div class="card">
+        <div class="topbar">
+          <div class="brand">
+            <div class="logo"></div>
+            <div>Agent Portal</div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <span class="chip" id="sessionChip">-</span>
+            <a class="btn" href="cart.html">Cart</a>
+            <button class="btn" id="logoutBtn" type="button">Logout</button>
+          </div>
+        </div>
+        <main class="main">
+          <div class="section">
+            <h1>Secure Checkout</h1>
+            <div class="checkout-grid" style="margin-top:14px">
+              <div>
+                <div class="panel">
+                  <div class="panel-title">Payment Details</div>
+                  <div class="muted" style="margin-top:6px">Select a payment method</div>
+
+                  <div class="pay-methods" style="margin-top:12px">
+                    <label class="pay-method">
+                      <input type="radio" name="payMethod" value="card" checked />
+                      <div class="pay-method-body">
+                        <div class="pay-method-title">Credit Card</div>
+                        <div class="pay-method-logos">VISA • Mastercard • AMEX • Discover • JCB • RuPay</div>
+                      </div>
+                    </label>
+                    <label class="pay-method">
+                      <input type="radio" name="payMethod" value="paypal" />
+                      <div class="pay-method-body">
+                        <div class="pay-method-title">PayPal</div>
+                        <div class="pay-method-logos">Buy now, pay later</div>
+                      </div>
+                    </label>
+                    <label class="pay-method">
+                      <input type="radio" name="payMethod" value="alipay" />
+                      <div class="pay-method-body">
+                        <div class="pay-method-title">Alipay</div>
+                        <div class="pay-method-logos">Pay in your local currency</div>
+                      </div>
+                    </label>
+                  </div>
+
+                  <div id="cardForm" class="card-form" style="margin-top:16px">
+                    <div class="field full">
+                      <div class="label">Card Type *</div>
+                      <select id="cardType" class="select">
+                        <option value="">Select card type</option>
+                        <option value="visa">Visa</option>
+                        <option value="mastercard">Mastercard</option>
+                        <option value="amex">American Express</option>
+                        <option value="discover">Discover</option>
+                        <option value="jcb">JCB</option>
+                        <option value="rupay">RuPay</option>
+                      </select>
+                    </div>
+                    <div class="field full">
+                      <div class="label">Card Number *</div>
+                      <input id="cardNumber" class="input" type="text" inputmode="numeric" autocomplete="cc-number" placeholder="Card number" />
+                    </div>
+                    <div class="field">
+                      <div class="label">Expiration Date (MM/YY) *</div>
+                      <input id="cardExpiry" class="input" type="text" inputmode="numeric" autocomplete="cc-exp" placeholder="MM/YY" />
+                    </div>
+                    <div class="field">
+                      <div class="label">CVV *</div>
+                      <input id="cardCvv" class="input" type="password" inputmode="numeric" autocomplete="cc-csc" placeholder="CVV" />
+                    </div>
+                    <div class="field full">
+                      <div class="label">Name on Card *</div>
+                      <input id="cardName" class="input" type="text" autocomplete="cc-name" placeholder="Name on card" />
+                    </div>
+                  </div>
+
+                  <div id="paymentError" class="error" style="margin-top:10px"></div>
+                  <div class="panel-footer">
+                    <a class="btn" href="cart.html">Back</a>
+                    <button class="btn primary" id="payNow" type="button">Pay</button>
+                  </div>
+                  <div class="hint" style="margin-top:10px"></div>
+                </div>
+              </div>
+              <aside>
+                <div class="panel panel-accent">
+                  <div class="panel-title">Order Summary</div>
+                  <div id="paymentOrderSummary" style="margin-top:12px"></div>
+                  <div class="summary-list" style="margin-top:12px">
+                    <div class="summary-line">
+                      <div class="k">Item Subtotal</div>
+                      <div class="v" id="paySubtotal">$0</div>
+                    </div>
+                    <div class="summary-line">
+                      <div class="k">Tax</div>
+                      <div class="v" id="payTax">$0</div>
+                    </div>
+                    <div class="summary-total">
+                      <div>Total</div>
+                      <div class="price" id="payTotal">$0</div>
+                    </div>
+                  </div>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

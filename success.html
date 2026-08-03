@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Agent Portal - Success</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="config.js"></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body data-page="success">
+    <div class="container">
+      <div class="card">
+        <div class="topbar">
+          <div class="brand">
+            <div class="logo"></div>
+            <div>Agent Portal</div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <span class="chip" id="sessionChip">-</span>
+            <a class="btn" href="dashboard.html">Dashboard</a>
+            <button class="btn" id="logoutBtn" type="button">Logout</button>
+          </div>
+        </div>
+        <div class="grid">
+          <aside class="sidebar card">
+            <h2>Services</h2>
+            <div id="serviceNav" class="nav"></div>
+          </aside>
+          <main class="main">
+            <div class="section">
+              <h1>Payment successful</h1>
+              <p>Your request has been marked as paid (demo).</p>
+              <div class="summary">
+                <div class="row">
+                  <div class="k">Order / Request ID</div>
+                  <div class="v" id="successId">-</div>
+                </div>
+                <div class="row">
+                  <div class="k">Status</div>
+                  <div class="v" id="successStatus">-</div>
+                </div>
+              </div>
+              <div style="margin-top:14px;display:flex;justify-content:flex-end;gap:10px">
+                <a class="btn primary" href="dashboard.html">Back to Dashboard</a>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

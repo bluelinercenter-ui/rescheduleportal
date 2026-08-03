@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Agent Portal - Cart</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="config.js"></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body data-page="cart" data-layout="full">
+    <div class="container">
+      <div class="card">
+        <div class="topbar">
+          <div class="brand">
+            <div class="logo"></div>
+            <div>Agent Portal</div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <span class="chip" id="sessionChip">-</span>
+            <a class="btn" href="dashboard.html">Dashboard</a>
+            <button class="btn" id="logoutBtn" type="button">Logout</button>
+          </div>
+        </div>
+        <main class="main">
+          <div class="section">
+            <h1>My Cart</h1>
+            <div class="checkout-grid" style="margin-top:14px">
+              <div>
+                <div class="panel">
+                  <div class="panel-header">
+                    <div class="panel-title">Cart Details</div>
+                    <button class="btn ghost" id="clearCart" type="button">Clear Cart</button>
+                  </div>
+                  <div id="cartDetails"></div>
+                  <div class="panel-footer">
+                    <button class="btn" id="addAnotherTest" type="button">Add Another Test</button>
+                    <a class="link" href="dashboard.html">Back to Dashboard</a>
+                  </div>
+                </div>
+              </div>
+              <aside>
+                <div class="panel panel-accent">
+                  <div class="panel-title">Order Summary</div>
+                  <div style="margin-top:10px">
+                    <a class="link" href="#">Add Voucher/Promo Code</a>
+                  </div>
+                  <div class="summary-list" style="margin-top:12px">
+                    <div class="summary-line">
+                      <div class="k">Item Subtotal</div>
+                      <div class="v" id="cartSubtotal">$0</div>
+                    </div>
+                    <div class="summary-line">
+                      <div class="k">Tax</div>
+                      <div class="v" id="cartTax">$0</div>
+                    </div>
+                    <div class="summary-total">
+                      <div>Total</div>
+                      <div class="price" id="cartPrice">$0</div>
+                    </div>
+                  </div>
+                  <div style="margin-top:14px">
+                    <button class="btn primary wide" id="proceedPayment" type="button">Proceed to Payment →</button>
+                  </div>
+                </div>
+              </aside>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

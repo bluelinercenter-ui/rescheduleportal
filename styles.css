@@ -1,0 +1,380 @@
+:root{
+  --bg:#f6f8fb;
+  --panel:#ffffff;
+  --panel2:#ffffff;
+  --text:#0f172a;
+  --muted:#64748b;
+  --line:#e5e7eb;
+  --brand:#2563eb;
+  --brand2:#2563eb;
+  --danger:#dc2626;
+  --ok:#059669;
+  --shadow:0 10px 28px rgba(15,23,42,.08);
+  --radius:14px;
+  --radius2:10px;
+  --max:1120px;
+  --font:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,"Noto Sans","Liberation Sans",sans-serif;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family:var(--font);
+  background:var(--bg);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+body[data-layout="full"] .container{
+  max-width:100%;
+  padding:0;
+}
+
+body[data-layout="full"] .card{
+  border-radius:0;
+  border:0;
+  box-shadow:none;
+  min-height:100vh;
+}
+
+body[data-layout="full"] .topbar{
+  padding:16px 22px;
+}
+
+body[data-layout="full"] .main{
+  padding:22px;
+}
+
+a{color:inherit;text-decoration:none}
+button,input,select,textarea{font:inherit}
+
+.container{max-width:var(--max);margin:0 auto;padding:28px}
+
+.card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 22px;
+  border-bottom:1px solid var(--line);
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  font-weight:700;
+  letter-spacing:.2px;
+}
+.logo{
+  width:34px;
+  height:34px;
+  border-radius:12px;
+  background:var(--brand);
+  box-shadow:none;
+}
+
+.chip{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 12px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:#f1f5f9;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.btn{
+  border:1px solid var(--line);
+  background:#ffffff;
+  color:var(--text);
+  padding:10px 14px;
+  border-radius:12px;
+  cursor:pointer;
+  transition:background .12s ease, border-color .12s ease;
+}
+.btn:hover{background:#f8fafc;border-color:#d1d5db}
+.btn:active{background:#f1f5f9}
+.btn.primary{
+  background:var(--brand);
+  border-color:var(--brand);
+  color:#ffffff;
+  font-weight:700;
+}
+.btn.danger{background:#fee2e2;border-color:#fecaca;color:#991b1b}
+.btn.ghost{background:transparent}
+
+.grid{
+  display:grid;
+  grid-template-columns:340px 1fr;
+  gap:18px;
+  align-items:start;
+}
+
+.sidebar{padding:16px;box-shadow:none}
+.sidebar h2{margin:4px 0 14px;font-size:14px;color:var(--muted);font-weight:600}
+
+.nav{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.nav a{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  padding:12px 12px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  color:var(--text);
+  background:#ffffff;
+  transition:background .12s ease, border-color .12s ease;
+}
+.nav a:hover{background:#f8fafc;border-color:#d1d5db}
+.nav a.active{background:#eef2ff;border-color:#c7d2fe}
+.nav .meta{color:var(--muted);font-size:12px}
+
+.main{padding:16px}
+.section{padding:18px}
+.section + .section{border-top:1px solid var(--line)}
+.section h1{margin:0 0 12px;font-size:20px}
+.section p{margin:0;color:var(--muted);line-height:1.55}
+
+.tabs{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:14px;
+}
+.tab{
+  padding:10px 12px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:#ffffff;
+  color:var(--text);
+  cursor:pointer;
+}
+.tab.active{background:#eef2ff;border-color:#c7d2fe}
+
+form{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+.field{display:flex;flex-direction:column;gap:8px}
+.field.full{grid-column:1 / -1}
+.label{font-size:13px;color:var(--muted)}
+.input,.select,.textarea{
+  padding:12px 12px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:#ffffff;
+  color:var(--text);
+  outline:none;
+}
+.textarea{min-height:98px;resize:vertical}
+.input:focus,.select:focus,.textarea:focus{border-color:#93c5fd;box-shadow:0 0 0 3px rgba(59,130,246,.15)}
+.hint{font-size:12px;color:var(--muted);line-height:1.45}
+.error{color:#b91c1c;font-size:13px}
+
+.actions{
+  grid-column:1 / -1;
+  display:flex;
+  gap:10px;
+  justify-content:flex-end;
+  padding-top:4px;
+}
+
+.login{
+  min-height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:28px;
+}
+.login-card{
+  width:min(520px, 100%);
+  padding:18px;
+}
+.login-card .body{padding:18px}
+.login-card h1{margin:0 0 6px;font-size:22px}
+.login-card p{margin:0 0 16px;color:var(--muted)}
+.login-card form{grid-template-columns:1fr}
+.login-card .actions{justify-content:space-between}
+
+.summary{
+  display:grid;
+  gap:10px;
+  margin-top:14px;
+}
+.row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#ffffff;
+}
+.row .k{color:var(--muted);font-size:13px}
+.row .v{font-weight:650}
+
+.price{
+  font-size:22px;
+  font-weight:800;
+  letter-spacing:.2px;
+}
+
+.checkout-grid{
+  display:grid;
+  grid-template-columns:minmax(0, 1fr) minmax(320px, 420px);
+  gap:18px;
+  align-items:start;
+}
+
+.checkout-grid > *{min-width:0}
+.checkout-grid aside{min-width:0}
+
+.panel{
+  border:1px solid var(--line);
+  border-radius:var(--radius2);
+  background:#ffffff;
+  padding:16px;
+  max-width:100%;
+}
+
+.panel-accent{
+  background:#eef2ff;
+  border-color:#c7d2fe;
+}
+
+.panel-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.panel-title{
+  font-size:16px;
+  font-weight:750;
+}
+
+.panel-footer{
+  margin-top:16px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.wide{width:100%}
+
+.link{
+  color:var(--brand);
+  font-weight:600;
+}
+.link:hover{text-decoration:underline}
+
+.muted{color:var(--muted);font-size:13px;line-height:1.45}
+
+.mono{
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+  overflow-wrap:anywhere;
+}
+
+.cart-item{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:14px;
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#ffffff;
+}
+
+.cart-icon{
+  width:38px;
+  height:38px;
+  border-radius:12px;
+  background:#eef2ff;
+  border:1px solid #c7d2fe;
+  flex:0 0 auto;
+}
+
+.cart-item-main{flex:1 1 auto;min-width:0}
+.cart-item-title{font-weight:750;line-height:1.25;overflow-wrap:anywhere}
+.cart-item-meta{margin-top:6px;font-size:13px;color:var(--muted);line-height:1.35}
+.cart-item-price{flex:0 0 auto;text-align:right}
+.cart-item-price-top{font-weight:800}
+.cart-item-price-sub{margin-top:6px;font-size:12px;color:var(--muted)}
+
+.summary-list{display:grid;gap:10px}
+.summary-line{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  font-size:13px;
+}
+.summary-total{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:12px;
+  padding-top:12px;
+  border-top:1px solid rgba(15,23,42,.12);
+  font-weight:800;
+}
+
+.pay-methods{display:grid;gap:10px}
+.pay-method{
+  display:flex;
+  align-items:flex-start;
+  gap:12px;
+  padding:12px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#ffffff;
+  cursor:pointer;
+}
+.pay-method input{margin-top:3px}
+.pay-method-body{flex:1 1 auto}
+.pay-method-title{font-weight:750}
+.pay-method-logos{margin-top:4px;font-size:12px;color:var(--muted);line-height:1.35}
+
+.card-form{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+
+.order-line{
+  padding:12px;
+  border:1px solid rgba(15,23,42,.10);
+  border-radius:12px;
+  background:rgba(255,255,255,.65);
+}
+.order-title{font-weight:750;overflow-wrap:anywhere}
+.order-meta{margin-top:6px;font-size:12px;color:var(--muted);line-height:1.35}
+
+@media (max-width: 980px){
+  .grid{grid-template-columns:1fr}
+  form{grid-template-columns:1fr}
+  .checkout-grid{grid-template-columns:1fr}
+  .card-form{grid-template-columns:1fr}
+}
+
+@media (max-width: 1120px){
+  .checkout-grid{grid-template-columns:1fr}
+}

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Agent Portal - Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="config.js"></script>
+    <script src="app.js" defer></script>
+  </head>
+  <body data-page="dashboard">
+    <div class="container">
+      <div class="card">
+        <div class="topbar">
+          <div class="brand">
+            <div class="logo"></div>
+            <div>Agent Portal</div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center">
+            <span class="chip" id="sessionChip">-</span>
+            <button class="btn" id="logoutBtn" type="button">Logout</button>
+          </div>
+        </div>
+        <div class="grid">
+          <aside class="sidebar card">
+            <h2>Services</h2>
+            <div id="serviceNav" class="nav"></div>
+          </aside>
+          <main class="main">
+            <div class="section">
+              <h1>Start a request</h1>
+              <p>Select a service from the left menu. Then select an exam type. After that, fill the information form to proceed to checkout.</p>
+              <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
+                <a class="btn primary" href="exam.html?service=reschedule">New Reschedule Request</a>
+                <a class="btn" href="exam.html?service=registration">New Registration Request</a>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
