@@ -3,39 +3,129 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Agent Portal - Dashboard</title>
+    <title>Dashboard — Exam Agent Portal</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="config.js"></script>
     <script src="app.js" defer></script>
   </head>
   <body data-page="dashboard">
-    <div class="container">
-      <div class="card">
-        <div class="topbar">
-          <div class="brand">
-            <div class="logo"></div>
-            <div>Agent Portal</div>
-          </div>
-          <div style="display:flex;gap:10px;align-items:center">
-            <span class="chip" id="sessionChip">-</span>
-            <button class="btn" id="logoutBtn" type="button">Logout</button>
+    <div class="portal">
+      <aside class="portal-sidebar">
+        <div class="portal-brand">
+          <div class="logo-mark">AP</div>
+          <div class="portal-brand-text">
+            <div class="portal-brand-title">Agent Portal</div>
+            <div class="portal-brand-sub">Exam Services</div>
           </div>
         </div>
-        <div class="grid">
-          <aside class="sidebar card">
-            <h2>Services</h2>
-            <div id="serviceNav" class="nav"></div>
-          </aside>
-          <main class="main">
-            <div class="section">
-              <h1>Start a request</h1>
-              <p>Select a service from the left menu. Then select an exam type. After that, fill the information form to proceed to checkout.</p>
-              <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap">
-                <a class="btn primary" href="exam.html?service=reschedule">New Reschedule Request</a>
-                <a class="btn" href="exam.html?service=registration">New Registration Request</a>
-              </div>
+
+        <div class="sidebar-section">
+          <div id="sidebarNav"></div>
+        </div>
+
+        <div class="sidebar-section">
+          <div id="serviceNav"></div>
+        </div>
+
+        <div class="sidebar-footer">
+          <div class="sidebar-user">
+            <div class="avatar" id="sidebarUserAvatar">U</div>
+            <div class="sidebar-user-body">
+              <div class="sidebar-user-name" id="sidebarUserName">Agent</div>
+              <div class="sidebar-user-email" id="sidebarUserEmail">—</div>
             </div>
-          </main>
+          </div>
+          <button class="btn ghost wide" id="sidebarLogoutBtn" type="button" style="margin-top:12px">Sign Out</button>
+        </div>
+      </aside>
+
+      <div class="portal-main">
+        <div class="portal-topbar">
+          <div class="portal-topbar-left">
+            <div class="page-breadcrumb" id="breadcrumb">Dashboard</div>
+          </div>
+          <div class="portal-topbar-right">
+            <div class="topbar-chip" id="sessionChip"><span class="dot"></span><span>-</span></div>
+            <a class="btn soft" href="cart.html">🛒 Cart</a>
+            <button class="btn" id="logoutBtn" type="button">Sign Out</button>
+          </div>
+        </div>
+
+        <div class="portal-content is-loading">
+          <div class="page-loader" aria-hidden="true">
+            <div class="spinner"></div>
+            <div class="pl-text">Loading<span class="pl-dots"></span></div>
+          </div>
+          <div class="stats-grid">
+            <div class="stat-card brand">
+              <div class="stat-top">
+                <div class="stat-label">Total Requests</div>
+                <div class="stat-icon">📋</div>
+              </div>
+              <div class="stat-value" id="totalCount">0</div>
+              <div class="stat-foot"><span class="up">↑ All time</span> · processed</div>
+            </div>
+            <div class="stat-card success">
+              <div class="stat-top">
+                <div class="stat-label">Completed (Paid)</div>
+                <div class="stat-icon">✓</div>
+              </div>
+              <div class="stat-value" id="paidCount">0</div>
+              <div class="stat-foot"><span class="up">↑ Successful</span> payments</div>
+            </div>
+            <div class="stat-card warning">
+              <div class="stat-top">
+                <div class="stat-label">Pending Submission</div>
+                <div class="stat-icon">⏱</div>
+              </div>
+              <div class="stat-value" id="submittedCount">0</div>
+              <div class="stat-foot">Awaiting checkout flow</div>
+            </div>
+            <div class="stat-card info">
+              <div class="stat-top">
+                <div class="stat-label">Requests (Last 7 days)</div>
+                <div class="stat-icon">📈</div>
+              </div>
+              <div class="stat-value" id="recentCount">0</div>
+              <div class="stat-foot"><span class="up">↑ Activity</span> · recent</div>
+            </div>
+          </div>
+
+          <div style="display:grid;grid-template-columns:minmax(0,1fr);gap:18px">
+            <div class="section">
+              <div class="section-head">
+                <div>
+                  <h1 id="pageTitle">Overview</h1>
+                  <p>Welcome back. Here's a quick look at your exam service requests.</p>
+                </div>
+                <div class="section-actions">
+                  <a class="btn primary" href="exam.html?service=score-reinstatement">＋ New Request</a>
+                </div>
+              </div>
+              <div class="hint" style="margin-bottom:14px">Note: <strong>Registration Offers</strong> and <strong>Account Update</strong> services require permission from the agent side before they can be used.</div>
+            </div>
+
+            <div class="section">
+              <div class="section-head">
+                <div>
+                  <h2>Recent Requests</h2>
+                  <p>Latest submissions and their status.</p>
+                </div>
+              </div>
+              <table class="tbl">
+                <thead>
+                  <tr>
+                    <th>Request ID</th>
+                    <th>Service / Exam</th>
+                    <th>Status</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody id="requestsTable">
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>

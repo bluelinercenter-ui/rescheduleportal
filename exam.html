@@ -3,37 +3,89 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Agent Portal - Select Exam</title>
+    <title>Service Selection — Exam Agent Portal</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="config.js"></script>
     <script src="app.js" defer></script>
   </head>
   <body data-page="exam">
-    <div class="container">
-      <div class="card">
-        <div class="topbar">
-          <div class="brand">
-            <div class="logo"></div>
-            <div>Agent Portal</div>
-          </div>
-          <div style="display:flex;gap:10px;align-items:center">
-            <span class="chip" id="sessionChip">-</span>
-            <a class="btn" href="dashboard.html">Dashboard</a>
-            <button class="btn" id="logoutBtn" type="button">Logout</button>
+    <div class="portal">
+      <aside class="portal-sidebar">
+        <div class="portal-brand">
+          <div class="logo-mark">AP</div>
+          <div class="portal-brand-text">
+            <div class="portal-brand-title">Agent Portal</div>
+            <div class="portal-brand-sub">Exam Services</div>
           </div>
         </div>
-        <div class="grid">
-          <aside class="sidebar card">
-            <h2>Services</h2>
-            <div id="serviceNav" class="nav"></div>
-          </aside>
-          <main class="main">
-            <div class="section">
-              <h1 id="serviceTitle">Service</h1>
-              <p>Select an exam type and fill the information form.</p>
+
+        <div class="sidebar-section">
+          <div id="sidebarNav"></div>
+        </div>
+
+        <div class="sidebar-section">
+          <div id="serviceNav"></div>
+        </div>
+
+        <div class="sidebar-footer">
+          <div class="sidebar-user">
+            <div class="avatar" id="sidebarUserAvatar">U</div>
+            <div class="sidebar-user-body">
+              <div class="sidebar-user-name" id="sidebarUserName">Agent</div>
+              <div class="sidebar-user-email" id="sidebarUserEmail">—</div>
+            </div>
+          </div>
+          <button class="btn ghost wide" id="sidebarLogoutBtn" type="button" style="margin-top:12px">Sign Out</button>
+        </div>
+      </aside>
+
+      <div class="portal-main">
+        <div class="portal-topbar">
+          <div class="portal-topbar-left">
+            <div class="page-breadcrumb" id="breadcrumb">Dashboard</div>
+          </div>
+          <div class="portal-topbar-right">
+            <div class="topbar-chip" id="sessionChip"><span class="dot"></span><span>-</span></div>
+            <a class="btn soft" href="cart.html">🛒 Cart</a>
+            <a class="btn" href="dashboard.html">Dashboard</a>
+            <button class="btn" id="logoutBtn" type="button">Sign Out</button>
+          </div>
+        </div>
+
+        <div class="portal-content is-loading">
+          <div class="page-loader" aria-hidden="true">
+            <div class="spinner"></div>
+            <div class="pl-text">Loading<span class="pl-dots"></span></div>
+          </div>
+          <div class="section">
+            <div class="section-head">
+              <div>
+                <h1 id="serviceTitle">Service</h1>
+                <p id="serviceSubtitle">Select an exam type to see available service options.</p>
+              </div>
+              <div class="section-actions">
+                <span class="chip brand">Step 1 of 3</span>
+              </div>
+            </div>
+
+            <div style="margin-top:16px">
+              <div class="label" style="margin-bottom:8px">Select Exam Type</div>
               <div class="tabs" id="examTabs"></div>
             </div>
-          </main>
+          </div>
+
+          <div class="section" id="subServiceSection" style="display:none">
+            <div class="section-head">
+              <div>
+                <h2 id="subServiceTitle">Score Reinstatement Options</h2>
+                <p>Choose a specific service option to proceed to the information form.</p>
+              </div>
+              <div class="section-actions">
+                <span class="chip success">Step 2 of 3</span>
+              </div>
+            </div>
+            <div class="tabs" id="subServiceTabs"></div>
+          </div>
         </div>
       </div>
     </div>

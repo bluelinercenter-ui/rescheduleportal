@@ -3,117 +3,164 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Information Form</title>
+    <title>Information Form — Exam Agent Portal</title>
     <link rel="stylesheet" href="styles.css" />
     <script src="config.js"></script>
     <script src="app.js" defer></script>
   </head>
   <body data-page="request">
-    <div class="container">
-      <div class="card">
-        <div class="topbar">
-          <div class="brand">
-            <div class="logo"></div>
-            <div>Agent Portal</div>
-          </div>
-          <div style="display:flex;gap:10px;align-items:center">
-            <span class="chip" id="sessionChip">-</span>
-            <a class="btn" href="dashboard.html">Dashboard</a>
-            <button class="btn" id="logoutBtn" type="button">Logout</button>
+    <div class="portal">
+      <aside class="portal-sidebar">
+        <div class="portal-brand">
+          <div class="logo-mark">AP</div>
+          <div class="portal-brand-text">
+            <div class="portal-brand-title">Agent Portal</div>
+            <div class="portal-brand-sub">Exam Services</div>
           </div>
         </div>
-        <div class="grid">
-          <aside class="sidebar card">
-            <h2>Services</h2>
-            <div id="serviceNav" class="nav"></div>
-          </aside>
-          <main class="main">
-            <div class="section">
-              <h1 id="serviceTitle">Service</h1>
-              <p>Fill the information form.</p>
-              <div style="margin-top:10px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
-                <div class="chip">Exam: <span id="examTitle" style="font-weight:700">-</span></div>
-                <a class="btn" id="changeExamLink" href="exam.html">Change Exam</a>
+
+        <div class="sidebar-section">
+          <div id="sidebarNav"></div>
+        </div>
+
+        <div class="sidebar-section">
+          <div id="serviceNav"></div>
+        </div>
+
+        <div class="sidebar-footer">
+          <div class="sidebar-user">
+            <div class="avatar" id="sidebarUserAvatar">U</div>
+            <div class="sidebar-user-body">
+              <div class="sidebar-user-name" id="sidebarUserName">Agent</div>
+              <div class="sidebar-user-email" id="sidebarUserEmail">—</div>
+            </div>
+          </div>
+          <button class="btn ghost wide" id="sidebarLogoutBtn" type="button" style="margin-top:12px">Sign Out</button>
+        </div>
+      </aside>
+
+      <div class="portal-main">
+        <div class="portal-topbar">
+          <div class="portal-topbar-left">
+            <div class="page-breadcrumb" id="breadcrumb">Dashboard</div>
+          </div>
+          <div class="portal-topbar-right">
+            <div class="topbar-chip" id="sessionChip"><span class="dot"></span><span>-</span></div>
+            <a class="btn soft" href="cart.html">🛒 Cart</a>
+            <a class="btn" href="dashboard.html">Dashboard</a>
+            <button class="btn" id="logoutBtn" type="button">Sign Out</button>
+          </div>
+        </div>
+
+        <div class="portal-content is-loading">
+          <div class="page-loader" aria-hidden="true">
+            <div class="spinner"></div>
+            <div class="pl-text">Loading<span class="pl-dots"></span></div>
+          </div>
+          <div class="section">
+            <div class="section-head">
+              <div>
+                <h1 id="serviceTitle">Service</h1>
+                <p>Fill the information form below. All mandatory fields are marked with <span style="color:var(--danger)">*</span>.</p>
+              </div>
+              <div class="section-actions">
+                <span class="chip success">Step 3 of 3</span>
               </div>
             </div>
-            <div class="section">
-              <h1>Information Form</h1>
-              <form id="infoForm">
-                <div class="field">
-                  <div class="label">Account ID</div>
-                  <input id="accountId" class="input" type="text" placeholder="Enter Account ID" />
-                </div>
-                <div class="field">
-                  <div class="label">Account Username/Mail address</div>
-                  <input id="accountUsername" class="input" type="text" placeholder="Enter username or email" required />
-                </div>
-                <div class="field">
-                  <div class="label">Account Password</div>
-                  <input id="accountPassword" class="input" type="password" placeholder="Enter account password" />
-                </div>
-                <div class="field">
-                  <div class="label">Mail Address</div>
-                  <input id="mailAddress" class="input" type="email" placeholder="Enter mail address" />
-                </div>
-                <div class="field">
-                  <div class="label">Mail Password</div>
-                  <input id="mailPassword" class="input" type="password" placeholder="Enter mail password" />
-                </div>
-                <div class="field">
-                  <div class="label">First Name</div>
-                  <input id="firstName" class="input" type="text" placeholder="First name" required />
-                </div>
-                <div class="field">
-                  <div class="label">Last Name</div>
-                  <input id="lastName" class="input" type="text" placeholder="Last name" required />
-                </div>
-                <div class="field">
-                  <div class="label">Date of Birth</div>
-                  <input id="dateOfBirth" class="input" type="date" />
-                </div>
-                <div class="field">
-                  <div class="label">Appointment Number</div>
-                  <input id="appointmentNumber" class="input" type="text" placeholder="Enter appointment number" />
-                </div>
-                <div class="field">
-                  <div class="label">Order Number</div>
-                  <input id="orderNumber" class="input" type="text" placeholder="Enter order number" />
-                </div>
-                <div class="field">
-                  <div class="label">Test Date and Time</div>
-                  <input id="testDateTime" class="input" type="datetime-local" />
-                </div>
-                <div class="field">
-                  <div class="label">National ID Card Number</div>
-                  <input id="nationalIdCardNumber" class="input" type="text" placeholder="Enter NID number" />
-                </div>
-                <div class="field">
-                  <div class="label">Passport Number</div>
-                  <input id="passportNumber" class="input" type="text" placeholder="Enter passport number" />
-                </div>
-                <div class="field">
-                  <div class="label">Passport (Image or PDF)</div>
-                  <input id="passportFile" class="input" type="file" accept=".jpg,.jpeg,.png,.pdf" />
-                  <div class="hint">Accepted: JPG / PNG / PDF (up to 5 MB for embedded save).</div>
-                </div>
-                <div class="field">
-                  <div class="label">National ID Card (Image or PDF)</div>
-                  <input id="nidFile" class="input" type="file" accept=".jpg,.jpeg,.png,.pdf" />
-                  <div class="hint">Accepted: JPG / PNG / PDF (up to 5 MB for embedded save).</div>
-                </div>
-                <div class="field full">
-                  <div class="label">Additional documents (optional)</div>
-                  <input id="additionalDocs" class="input" type="file" accept=".jpg,.jpeg,.png,.pdf" multiple />
-                  <div class="hint">You can attach multiple documents.</div>
-                </div>
-                <div id="formError" class="error full"></div>
-                <div class="actions">
-                  <a class="btn" href="dashboard.html">Cancel</a>
-                  <button class="btn primary" type="submit">Save &amp; Proceed</button>
-                </div>
-              </form>
+
+            <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+              <div class="chip brand">Exam: <span id="examTitle" style="font-weight:800">-</span></div>
+              <div class="chip" id="subChip" style="display:none">Option: <span id="subTitle" style="font-weight:800">-</span></div>
+              <div class="chip success">Price: <span id="priceChip" style="font-weight:800">-</span></div>
+              <a class="btn" id="changeExamLink" href="exam.html">← Change Exam / Option</a>
             </div>
-          </main>
+          </div>
+
+          <div class="section">
+            <div class="section-head">
+              <div>
+                <h2>Information Form</h2>
+                <p>Provide account and personal details required for this service.</p>
+              </div>
+            </div>
+
+            <form id="infoForm">
+              <div class="field full">
+                <div class="label">Account ID</div>
+                <input id="accountId" class="input" type="text" placeholder="Enter Account ID (optional)" />
+              </div>
+              <div class="field">
+                <div class="label">Account Username / Email<span class="req">*</span></div>
+                <input id="accountUsername" class="input" type="text" placeholder="Enter username or email" required />
+              </div>
+              <div class="field">
+                <div class="label">Account Password</div>
+                <input id="accountPassword" class="input" type="password" placeholder="Enter account password" />
+              </div>
+              <div class="field">
+                <div class="label">Mail Address</div>
+                <input id="mailAddress" class="input" type="email" placeholder="Enter mail address" />
+              </div>
+              <div class="field">
+                <div class="label">Mail Password</div>
+                <input id="mailPassword" class="input" type="password" placeholder="Enter mail password" />
+              </div>
+              <div class="field">
+                <div class="label">First Name<span class="req">*</span></div>
+                <input id="firstName" class="input" type="text" placeholder="First name" required />
+              </div>
+              <div class="field">
+                <div class="label">Last Name<span class="req">*</span></div>
+                <input id="lastName" class="input" type="text" placeholder="Last name" required />
+              </div>
+              <div class="field">
+                <div class="label">Date of Birth</div>
+                <input id="dateOfBirth" class="input" type="date" />
+              </div>
+              <div class="field">
+                <div class="label">Appointment Number</div>
+                <input id="appointmentNumber" class="input" type="text" placeholder="Enter appointment number" />
+              </div>
+              <div class="field">
+                <div class="label">Order Number</div>
+                <input id="orderNumber" class="input" type="text" placeholder="Enter order number" />
+              </div>
+              <div class="field">
+                <div class="label">Test Date and Time</div>
+                <input id="testDateTime" class="input" type="datetime-local" />
+              </div>
+              <div class="field">
+                <div class="label">National ID Card Number</div>
+                <input id="nationalIdCardNumber" class="input" type="text" placeholder="Enter NID number" />
+              </div>
+              <div class="field">
+                <div class="label">Passport Number</div>
+                <input id="passportNumber" class="input" type="text" placeholder="Enter passport number" />
+              </div>
+              <div class="field">
+                <div class="label">Passport (Image or PDF)</div>
+                <input id="passportFile" class="input" type="file" accept=".jpg,.jpeg,.png,.pdf" />
+                <div class="hint">Accepted: JPG / PNG / PDF (up to 5 MB for embedded save).</div>
+              </div>
+              <div class="field">
+                <div class="label">National ID Card (Image or PDF)</div>
+                <input id="nidFile" class="input" type="file" accept=".jpg,.jpeg,.png,.pdf" />
+                <div class="hint">Accepted: JPG / PNG / PDF (up to 5 MB for embedded save).</div>
+              </div>
+              <div class="field full">
+                <div class="label">Additional documents (optional)</div>
+                <input id="additionalDocs" class="input" type="file" accept=".jpg,.jpeg,.png,.pdf" multiple />
+                <div class="hint">You can attach multiple documents (JPG / PNG / PDF).</div>
+              </div>
+
+              <div id="formError" class="error full"></div>
+
+              <div class="actions">
+                <a class="btn ghost" href="dashboard.html">Cancel</a>
+                <button class="btn primary" type="submit">Save &amp; Proceed to Cart →</button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>

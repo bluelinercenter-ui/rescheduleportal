@@ -3,51 +3,307 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Agent Portal - Success</title>
+    <title>Payment Successful</title>
     <link rel="stylesheet" href="styles.css" />
-    <script src="config.js"></script>
-    <script src="app.js" defer></script>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        background: #ffffff;
+      }
+      .success-page {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background: #ffffff;
+      }
+      .success-card {
+        width: 100%;
+        max-width: 600px;
+        background: #ffffff;
+        padding: 40px 32px 32px;
+        border-radius: 16px;
+        box-shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.1), 0 4px 14px -4px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e5e7eb;
+        position: relative;
+        overflow: hidden;
+      }
+      .success-check-wrap {
+        position: relative;
+        width: 96px;
+        height: 96px;
+        margin: 0 auto 28px auto;
+      }
+      .success-check-bg {
+        position: absolute;
+        inset: -16px;
+        border-radius: 50%;
+        background: radial-gradient(circle at 30% 30%, rgba(34, 197, 94, .18), rgba(79, 70, 229, .08) 55%, transparent 72%);
+        filter: blur(8px);
+      }
+      .success-check {
+        position: relative;
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: linear-gradient(135deg, #10b981 0%, #06b6d4 50%, #6366f1 100%);
+        box-shadow: 0 12px 32px -12px rgba(16, 185, 129, 0.55);
+        animation: checkPop .55s cubic-bezier(.2,1.2,.4,1.1) both;
+      }
+      .success-check svg {
+        width: 56px;
+        height: 56px;
+      }
+      @keyframes checkPop {
+        0% { transform: scale(.65) rotate(-6deg); opacity: 0; }
+        60% { transform: scale(1.06) rotate(2deg); opacity: 1; }
+        100% { transform: scale(1) rotate(0); }
+      }
+      .success-tag {
+        display: inline-block;
+        padding: 7px 16px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: .2px;
+        color: #047857;
+        background: linear-gradient(135deg, #ecfdf5, #d1fae5);
+        border: 1px solid #a7f3d0;
+        margin-bottom: 18px;
+      }
+      .success-title {
+        margin: 0 0 12px 0;
+        font-size: 28px;
+        line-height: 1.15;
+        font-weight: 900;
+        background: linear-gradient(135deg, #0f172a 0%, #4338ca 45%, #0891b2 100%);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        letter-spacing: -.2px;
+      }
+      .success-sub {
+        margin: 0 0 28px 0;
+        color: #64748b;
+        font-size: 14.5px;
+        line-height: 1.7;
+      }
+      .success-meta {
+        margin-bottom: 28px;
+        display: grid;
+        gap: 2px;
+        background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 60%, #ecfeff 100%);
+        border: 1px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 10px;
+        overflow: hidden;
+      }
+      .s-meta-row {
+        display: grid;
+        grid-template-columns: minmax(160px, 220px) 1fr;
+        align-items: center;
+        padding: 12px 16px;
+        gap: 16px;
+        border-radius: 12px;
+        transition: background .2s ease;
+      }
+      .s-meta-row:hover { background: rgba(255, 255, 255, .8); }
+      .s-meta-row + .s-meta-row {
+        border-top: 1px dashed rgba(148, 163, 184, .35);
+      }
+      .s-meta-k {
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: .4px;
+        text-transform: uppercase;
+        color: #64748b;
+      }
+      .s-meta-v {
+        font-size: 14.5px;
+        font-weight: 700;
+        color: #3730a3;
+        text-align: right;
+        justify-self: end;
+      }
+      .s-meta-v.mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-weight: 800;
+        color: #4338ca;
+        background: rgba(99, 102, 241, .1);
+        border: 1px solid rgba(99, 102, 241, .18);
+        border-radius: 10px;
+        padding: 6px 12px;
+      }
+      .s-meta-v.accent {
+        font-size: 18px;
+        font-weight: 900;
+        background: linear-gradient(135deg, #7c3aed, #db2777 60%, #f97316);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .s-meta-v .pill-green {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 999px;
+        font-size: 12px;
+        background: #d1fae5;
+        color: #065f46;
+        font-weight: 800;
+      }
+      .success-actions {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .btn-success-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 22px;
+        font-size: 14.5px;
+        font-weight: 800;
+        border-radius: 13px;
+        background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+        color: #fff;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 6px 16px -6px rgba(79, 70, 229, .55);
+        transition: all .15s ease;
+      }
+      .btn-success-primary:hover {
+        background: linear-gradient(135deg, #4338ca 0%, #4f46e5 100%);
+        box-shadow: 0 8px 20px -6px rgba(79, 70, 229, .7);
+        transform: translateY(-1px);
+      }
+      .btn-success-ghost {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 22px;
+        font-size: 14.5px;
+        font-weight: 700;
+        border-radius: 13px;
+        background: #ffffff;
+        color: #475569;
+        text-decoration: none;
+        border: 1px solid #e2e8f0;
+        cursor: pointer;
+        transition: all .15s ease;
+      }
+      .btn-success-ghost:hover {
+        background: #f1f5f9;
+        border-color: #cbd5e1;
+      }
+      .confetti {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        overflow: visible;
+        z-index: 0;
+      }
+      .cf {
+        position: absolute;
+        width: 10px; height: 14px;
+        top: -10px;
+        border-radius: 2px 4px 2px 4px;
+        opacity: .9;
+        transform: translateY(-12px) rotate(0);
+        animation: cf 2.8s ease-out infinite;
+      }
+      .cf.c1{left:6%;background:#f472b6;animation-delay:0s}
+      .cf.c2{left:14%;background:#34d399;animation-delay:.18s;height:10px;width:10px;border-radius:50%}
+      .cf.c3{left:26%;background:#60a5fa;animation-delay:.35s}
+      .cf.c4{left:38%;background:#fbbf24;animation-delay:.5s;height:9px;width:14px;border-radius:999px}
+      .cf.c5{right:36%;background:#a78bfa;animation-delay:.7s}
+      .cf.c6{right:24%;background:#f87171;animation-delay:.85s;height:12px;width:12px;border-radius:50%}
+      .cf.c7{right:12%;background:#22d3ee;animation-delay:1.05s}
+      .cf.c8{right:4%;background:#f472b6;animation-delay:1.25s;height:10px;width:10px;border-radius:50%}
+      @keyframes cf {
+        0%{transform:translate3d(0,-10px,0) rotate(0);opacity:0}
+        10%{opacity:1}
+        100%{transform:translate3d(22px,260px,0) rotate(380deg);opacity:0}
+      }
+      .success-card > * { position: relative; z-index: 2; }
+    </style>
   </head>
-  <body data-page="success">
-    <div class="container">
-      <div class="card">
-        <div class="topbar">
-          <div class="brand">
-            <div class="logo"></div>
-            <div>Agent Portal</div>
-          </div>
-          <div style="display:flex;gap:10px;align-items:center">
-            <span class="chip" id="sessionChip">-</span>
-            <a class="btn" href="dashboard.html">Dashboard</a>
-            <button class="btn" id="logoutBtn" type="button">Logout</button>
+  <body>
+    <div class="success-page">
+      <div class="success-card">
+        <div class="confetti" aria-hidden="true">
+          <span class="cf c1"></span><span class="cf c2"></span><span class="cf c3"></span><span class="cf c4"></span>
+          <span class="cf c5"></span><span class="cf c6"></span><span class="cf c7"></span><span class="cf c8"></span>
+        </div>
+
+        <div class="success-check-wrap">
+          <div class="success-check-bg"></div>
+          <div class="success-check">
+            <svg viewBox="0 0 52 52" aria-hidden="true">
+              <path d="M16 27.5 L23 34.5 L36 19.5" fill="none" stroke="#fff" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10"></path>
+            </svg>
           </div>
         </div>
-        <div class="grid">
-          <aside class="sidebar card">
-            <h2>Services</h2>
-            <div id="serviceNav" class="nav"></div>
-          </aside>
-          <main class="main">
-            <div class="section">
-              <h1>Payment successful</h1>
-              <p>Your request has been marked as paid (demo).</p>
-              <div class="summary">
-                <div class="row">
-                  <div class="k">Order / Request ID</div>
-                  <div class="v" id="successId">-</div>
-                </div>
-                <div class="row">
-                  <div class="k">Status</div>
-                  <div class="v" id="successStatus">-</div>
-                </div>
-              </div>
-              <div style="margin-top:14px;display:flex;justify-content:flex-end;gap:10px">
-                <a class="btn primary" href="dashboard.html">Back to Dashboard</a>
-              </div>
-            </div>
-          </main>
+
+        <div style="text-align:center">
+          <span class="success-tag">Payment Successful</span>
+        </div>
+
+        <h1 class="success-title">Your payment has been completed.</h1>
+        <p class="success-sub">Your request has been marked as paid (demo). We'll process it shortly and update you on the dashboard.</p>
+
+        <div class="success-meta">
+          <div class="s-meta-row">
+            <div class="s-meta-k">Order / Request ID</div>
+            <div class="s-meta-v mono" id="successId">REQ-DEMO-001</div>
+          </div>
+          <div class="s-meta-row">
+            <div class="s-meta-k">Exam</div>
+            <div class="s-meta-v" id="successExam">TOEFL iBT</div>
+          </div>
+          <div class="s-meta-row">
+            <div class="s-meta-k">Service</div>
+            <div class="s-meta-v" id="successService">Score Reinstatement</div>
+          </div>
+          <div class="s-meta-row">
+            <div class="s-meta-k">Amount Paid</div>
+            <div class="s-meta-v accent" id="successAmount">$0.00</div>
+          </div>
+          <div class="s-meta-row">
+            <div class="s-meta-k">Status</div>
+            <div class="s-meta-v"><span class="pill-green" id="successStatus">Paid</span></div>
+          </div>
+        </div>
+
+        <div class="success-actions">
+          <a class="btn-success-primary" href="dashboard.html">Back to Dashboard</a>
+          <a class="btn-success-ghost" href="exam.html">New Request</a>
         </div>
       </div>
     </div>
+
+    <script>
+      (function () {
+        try {
+          var raw = sessionStorage.getItem("pendingOrder");
+          if (raw) {
+            var data = JSON.parse(raw);
+            var idEl = document.getElementById("successId");
+            var examEl = document.getElementById("successExam");
+            var serviceEl = document.getElementById("successService");
+            var amountEl = document.getElementById("successAmount");
+            if (idEl && data.id) idEl.textContent = data.id;
+            if (examEl && data.exam) examEl.textContent = data.exam;
+            if (serviceEl && data.service) serviceEl.textContent = data.service;
+            if (amountEl && data.total) amountEl.textContent = data.total;
+          }
+        } catch (e) {}
+      })();
+    </script>
   </body>
 </html>

